@@ -29,13 +29,14 @@ function triggerDownload(markdown, filename) {
   a.href = url;
   a.download = filename;
   a.click();
-  URL.revokeObjectURL(url);
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
 
 async function processFile(file) {
   const ext = getExtension(file.name);
   if (!SUPPORTED_EXTENSIONS.has(ext)) {
-    showToast('Only .docx and .pdf files are supported.', 'error');
+    const extensionsList = Array.from(SUPPORTED_EXTENSIONS).join(', ');
+    showToast(`Only ${extensionsList} files are supported.`, 'error');
     return;
   }
 
@@ -51,7 +52,12 @@ async function processFile(file) {
     if (!response.ok) {
       const data = await response.json().catch(() => ({}));
       if (data.detail === 'unsupported_type') {
-        showToast('Only .docx and .pdf files are supported.', 'error');
+        const extensionsList = Array.from(SUPPORTED_EXTENSIONS).join(', ');
+        showToast(`Only ${extensionsList} files are supported.`, 'error');
+      } else if (data.detail === 'file_too_large') {
+        showToast('File is too large. Default maximum size is 100 MB.', 'error');
+      } else if (data.detail === 'conversion_failed') {
+        showToast('Conversion failed. File possibly corrupt.', 'error');
       } else {
         showToast('Conversion failed. Please try again.', 'error');
       }
@@ -90,8 +96,12 @@ dropZone.addEventListener('dragleave', (e) => {
 dropZone.addEventListener('drop', (e) => {
   e.preventDefault();
   dropZone.classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file) processFile(file);
+  const files = e.dataTransfer.files;
+  if (files.length > 1) {
+    showToast('Only one file at a time is supported.', 'error');
+    return;
+  }
+  if (files[0]) processFile(files[0]);
 });
 
 // Click-to-browse (the hidden input covers the zone via position:absolute)
