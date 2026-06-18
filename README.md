@@ -10,6 +10,8 @@ A lightweight local utility that converts `.docx` and `.pdf` files to Markdown v
 ║ 11010110 ║       **bold**  _italic_  `code`
 ╚══════════╝       ─ list  ·  > blockquote
 
+![Decant Screenshot](./decant_screenshot.jpg)
+
 ## Why
 
 **To reduce token usage and processing time when using AI.**
