@@ -4,11 +4,13 @@
 
 A lightweight local utility that converts `.docx` and `.pdf` files to Markdown via a drag-and-drop web interface.
 
+```
 ╔══════════╗
 ║ 10110100 ║
 ║ 01001011 ╠═~~>  # Heading
 ║ 11010110 ║       **bold**  _italic_  `code`
 ╚══════════╝       ─ list  ·  > blockquote
+```
 
 ![Decant Screenshot](./decant_screenshot.jpg)
 
