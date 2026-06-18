@@ -1,5 +1,10 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        PORT: ${PORT:-8000}
     ports:
-      - "8080:8000"
+      - "${PORT:-8000}:${PORT:-8000}"
+    environment:
+      - PORT=${PORT:-8000}
