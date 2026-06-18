@@ -16,7 +16,8 @@ A lightweight local utility that converts `.docx` and `.pdf` files to Markdown v
 
 ## Why
 
-**To reduce token usage and processing time when using AI.**
+**To reduce token usage and processing time when using AI.** 
+
 AI chat and agent interfaces — Claude, ChatGPT, Copilot, etc. — work natively with text. Uploading a Word document or PDF requires the model to use tools, consume extra tokens, and spend time parsing a binary format before it can reason about the content. Markdown is plain text: the model reads it directly, with no overhead.
 
 This tool sits in your local browser. Drop a file in, get a `.md` file back. The resulting Markdown can be pasted into a chat, attached as a text file, or fed to an agent — all with lower token cost and faster response times than the original binary.
@@ -44,8 +45,8 @@ No other local dependencies are required to run the app.
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/docx_pdf_to_md.git
-cd docx_pdf_to_md
+git clone https://github.com/TechIsSoCool/decant.git
+cd decant
 ```
 
 **2. Build and start the container**
